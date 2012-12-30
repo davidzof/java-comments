@@ -2,7 +2,6 @@ package com.abcseo.comments;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Comment {
@@ -10,7 +9,7 @@ public class Comment {
 	String email;
 	String comment;
 	Date date;
-	private static DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
+	private static DateFormat df = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm");
 
 	public Comment() {
 		date = new Date();

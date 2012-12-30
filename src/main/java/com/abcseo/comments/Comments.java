@@ -23,7 +23,8 @@ public class Comments {
 	private int itemsPerPage;
 	private int total; // total results
 
-	public Comments(int start, int itemsPerPage, int total, List<Comment> results) {
+	public Comments(int start, int itemsPerPage, int total,
+			List<Comment> results) {
 		this.start = start;
 		this.itemsPerPage = itemsPerPage;
 		this.total = total;
@@ -53,7 +54,6 @@ public class Comments {
 	public Iterator<Comment> getResults() {
 		return results.iterator();
 	}
-	
 
 	public boolean pager() {
 		return (total > itemsPerPage) ? true : false;

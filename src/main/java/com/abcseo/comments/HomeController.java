@@ -1,10 +1,7 @@
 package com.abcseo.comments;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +26,15 @@ public class HomeController {
 	private static final int count = 5;
 
 	@RequestMapping(value = { "/*.htm", "/*/*.htm" }, produces = "text/html; charset=utf-8", method = RequestMethod.GET)
-	public String main(HttpServletRequest request, Model model, int start) {
+	public String main(HttpServletRequest request, Model model, Integer start) {
 		String uri = request.getServletPath();
 
-		Comments comments = repository.getComments(uri, start, count);
-		if (comments != null) {
-			model.addAttribute("comments", comments);
-		}
 		model.addAttribute("id", uri);
-
+		if (start == null) {
+			model.addAttribute("start", "0");
+		} else {
+			model.addAttribute("start", start);
+		}
 		return "index";
 	}
 
@@ -57,4 +54,30 @@ public class HomeController {
 		return "comment";
 	}
 
+	@RequestMapping(value = { "/*.htm", "/*/*.htm" }, produces = "text/html; charset=utf-8", method = RequestMethod.POST)
+	public String ajaxComments(HttpServletRequest request, Model model,
+			Integer start) {
+		String uri = request.getServletPath();
+
+		Comments comments = repository.getComments(uri, start, count);
+		if (comments != null) {
+			model.addAttribute("comments", comments);
+		}
+
+		model.addAttribute("id", uri);
+
+		return "comments";
+	}
+
+	@RequestMapping(value = { "/fetchComments.do" }, produces = "text/html; charset=utf-8", method = RequestMethod.GET)
+	public String fetch(Model model, int start, String uri) {
+		Comments comments = repository.getComments(uri, start, count);
+		if (comments != null) {
+			model.addAttribute("comments", comments);
+		}
+
+		model.addAttribute("id", uri);
+
+		return "comments";
+	}
 }
