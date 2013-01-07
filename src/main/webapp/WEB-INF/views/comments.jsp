@@ -5,24 +5,16 @@
 		<h1>
 			<small>Comments</small>
 		</h1>
-		<ol id="posts-list">
+		<ul id="posts-list">
 			<c:forEach items="${comments.results}" var="comment">
-				<li>
-					<article id="1" class="hentry">
-						<footer class="post-info">
-							<abbr class="published" title="${comment.date}">
-								${comment.date}</abbr>
-							<address class="vcard author">
-								By <a class="url fn" href="#">${comment.author}</a>
-							</address>
-						</footer>
-						<div class="entry-content">
-							<p>${comment.comment}</p>
-						</div>
-					</article>
-				</li>
+				<li><a href="#${comment.id}">#</a>
+					<p>Posted on ${comment.date}</p>
+					<p> by ${comment.author}</p>
+					<div class="content"><p>${comment.comment}
+					</p></div>
+				</li>	
 			</c:forEach>
-		</ol>
+		</ul>
 	</div>
 
 	<div class="row">
