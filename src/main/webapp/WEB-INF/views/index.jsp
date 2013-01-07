@@ -154,8 +154,8 @@
 			displayComment(data);
 		}
 
-		function displayComment(data) {
-			var commentHtml = createComment(data);
+		function displayComment(comment) {
+			var commentHtml = toHtml(comment);
 			var commentEl = $(commentHtml);
 			commentEl.hide();
 			var postsList = $('#posts-list');
@@ -164,15 +164,12 @@
 			commentEl.slideDown();
 		}
 
-		function createComment(data) {
-			var html = '' + '<li><article id="' + data.id + '" class="hentry">'
-					+ '<footer class="post-info">'
-					+ '<abbr class="published" title="' + data.date + '">'
-					+ data.date + '</abbr>' + '<address class="vcard author">'
-					+ 'By <a class="url fn" href="#">' + data.author + '</a>'
-					+ '</address>' + '</footer>'
-					+ '<div class="entry-content">' + '<p>' + data.comment
-					+ '</p>' + '</div>' + '</article></li>';
+		function toHtml(comment) {
+			var html = '<li>' + comment.id
+					+ '<p>' + comment.date + '</p>'
+					+ '<p> by ' + comment.author + '</p>'
+					+ '<div class="content">' + '<p>' + comment.comment
+					+ '</p>' + '</div></li>';
 
 			return html;
 		}
